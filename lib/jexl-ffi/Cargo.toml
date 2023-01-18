@@ -1,0 +1,11 @@
+[package]
+name = "jexl-ffi"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jexl-eval = "0.2.2"
+serde_json = "1.0.85"
+libc = "0.2"
