@@ -1,6 +1,33 @@
 /*
 jexl is a library to evaluate the jexl scripting language in Go.
 This implementation relies on the Rust library `jexl-rs`.
+
+There are two ways to use this library.
+1. Oneshot with `Eval()`
+2. Engine
+
+## Oneshots
+
+Using oneshots looks like this
+
+	expression := "1 + 1 * 2 / 3"
+	res, err := jexl.Eval(expression)
+	if err != nil { ... }
+	fmt.Println(res)
+
+This instantiates a new engine on the backend every time.
+There is no way to give a context here, for that use the Engine approach.
+
+## Engines
+
+Using Engines looks like this
+
+	expression = "1 + a * 2 / b"
+	context = map[string]int{"a": 1, "b": "3"}
+	engine := jexl.NewEngine(context, expression)
+	defer engine.Free()
+	res = engine.Run()
+	fmt.Println(res)
 */
 package jexl
 
