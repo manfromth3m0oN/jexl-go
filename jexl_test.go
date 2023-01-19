@@ -16,3 +16,18 @@ func TestJexl(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestEngine(t *testing.T) {
+	testContext := map[string]interface{}{"a": map[string]interface{}{"b": 2.0}}
+	engine, err := jexl.NewEngine(testContext, "a.b")
+	defer engine.Free()
+	if err != nil {
+		t.Logf("failed building engine: %v", err)
+		t.FailNow()
+	}
+	res := engine.Run()
+	if res != "2" {
+		t.Logf("Result is %v, not 2", res)
+		t.FailNow()
+	}
+}
